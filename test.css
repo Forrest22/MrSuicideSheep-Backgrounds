@@ -20,6 +20,12 @@ body {
     position: absolute;
 }
 
+.thumbs {
+    height: 100%;
+    width: auto;
+    overflow: hidden;
+}
+
 /* slider styles */
 
 .slider {
