@@ -1,0 +1,34 @@
+body {
+    padding: 20px;
+    font-family: Arial;
+}
+
+.grid {
+    width: 95%;
+    height: 600px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #ddd;
+    margin: 10px 0px;
+    border: 10px solid #ddd;
+    clear: both;
+}
+
+.grid > div {
+    background-color: #fff;
+    position: absolute;
+}
+
+/* slider styles */
+
+.slider {
+    width: 200px;
+    display: inline-block;
+    margin: 0px 10px;
+}
+
+.sliderLabel {
+    font-size: 18px;
+    font-weight: bold;
+}
