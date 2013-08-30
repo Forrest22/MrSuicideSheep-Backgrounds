@@ -1,8 +1,6 @@
 // The grid manages tiles using ids, which you can define. For our
 // examples we'll just use the tile number as the unique id.
-var TILE_IDS = [
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24
-];
+var TILE_IDS = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ];
 
 // Grid
 $(function() {
@@ -25,16 +23,10 @@ $(function() {
         var i = tileId;
         var tile = new Tiles.Tile(tileId);
         $(tile).addClass("container portrait");
-        //tile.$el.append('<div class="dev-tile-number">' + tileId + ' TEST</div>');
         $.getJSON('https://gdata.youtube.com/feeds/api/videos?q=MrSuicideSheep&max-re‌​sults=5&v=2&alt=jsonc&orderby=published', function(ytdata) {
-            /*
-            var html = "<div class=\"tile\">
-            <span class=\"tile-title\">ytdata.data.items[i].title</span>
-            <img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">
-            </div>";
-            */
             console.log(ytdata.data.items[i]);
-            var html = "<a href=\"http://img.youtube.com/vi/"+ ytdata.data.items[i].id +"/maxresdefault.jpg\"><img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">";
+            var html = "<a href=\"http://img.youtube.com/vi/"+ ytdata.data.items[i].id +"/maxresdefault.jpg\" data-lightbox=\""+ ytdata.data.items[i].id +"\" title=\""+ ytdata.data.items[i].title +"\"><img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">";
+            console.log(html);
             tile.$el.append(html);
             html =  "<h3 class=\"tile-title\"><a href=\"http://www.youtube.com/watch?v="+ ytdata.data.items[i].id +"\">" + ytdata.data.items[i].title + "<a></h3>";
             tile.$el.append(html);
