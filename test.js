@@ -24,6 +24,8 @@ $(function() {
     grid.createTile = function(tileId) {
         var i = tileId;
         var tile = new Tiles.Tile(tileId);
+        console.log(tile);
+        $(tile).addClass("container portrait");
         //tile.$el.append('<div class="dev-tile-number">' + tileId + ' TEST</div>');
         $.getJSON('https://gdata.youtube.com/feeds/api/videos?q=MrSuicideSheep&max-re‌​sults=5&v=2&alt=jsonc&orderby=published', function(ytdata) {
             /*
@@ -32,9 +34,9 @@ $(function() {
             <img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">
             </div>";
             */
-            var html = "<span class=\"tile-title\">" + ytdata.data.items[i].title + "</span>";
+            var html = "<img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">";
             tile.$el.append(html);
-            html = "<img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">";
+            html =  "<h3 class=\"tile-title\">" + ytdata.data.items[i].title + "</h3>";
             tile.$el.append(html);
             });
         return tile;
