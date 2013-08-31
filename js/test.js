@@ -10,19 +10,24 @@ $(function() {
     var el = document.getElementById('image-grid'),
         grid = new Tiles.Grid(el),
         updateGrid = function(event) {
-
             // update the set of tiles and redraw the grid
             grid.updateTiles(TILE_IDS.slice(0, TILE_IDS.length));
             grid.redraw(true /* animate tile movements */);
+            
+            // calculates the height, to set the div of the grid as
+            var newHeight = grid.template.numRows * (grid.cellSize + grid.cellPadding);
+            console.log(newHeight)
+            $(el).animate({
+                height: newHeight+'px'
+            });
+
         };
 
     grid.createTile = function(tileId) {
         var i = tileId%25;
         var tile = new Tiles.Tile(tileId);
-        console.log(tileId);
         var startIndex = timesClicked*25 + 1;
         $.getJSON('https://gdata.youtube.com/feeds/api/videos?author=MrSuicideSheep&start-index='+startIndex+'&max-results=25&v=2&alt=jsonc&orderby=published', function(ytdata) {
-            console.log(ytdata);
             var html = "<a href=\"http://img.youtube.com/vi/"+ ytdata.data.items[i].id +"/maxresdefault.jpg\"><img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">";
             tile.$el.append(html);
             html =  "<h3 class=\"tile-title\"><a href=\"http://www.youtube.com/watch?v="+ ytdata.data.items[i].id +"\">" + ytdata.data.items[i].title + "<a></h3>";
@@ -49,13 +54,8 @@ $(function() {
             grid.addTiles(newId, false);
         }
         updateGrid(event);
-        updateButtonPos();
+        grid.animate(grid.height*2);
       })
-
-    updateButtonPos = function(){
-        var height = $('.image-grid').scrollHeight;
-        alert(height);
-    }
 
     // wait until user finishes resizing the browser
     var debouncedResize = debounce(function() {
