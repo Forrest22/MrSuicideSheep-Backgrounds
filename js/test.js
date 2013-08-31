@@ -33,7 +33,7 @@ $(function() {
 
     // testing out the use of a jQuery button
     var timesClicked = 0;
-    $( "button" )
+    $("button")
       .button({
         create: updateGrid
       })
@@ -49,7 +49,13 @@ $(function() {
             grid.addTiles(newId, false);
         }
         updateGrid(event);
-      });
+        updateButtonPos();
+      })
+
+    updateButtonPos = function(){
+        var height = $('.image-grid').scrollHeight;
+        alert(height);
+    }
 
     // wait until user finishes resizing the browser
     var debouncedResize = debounce(function() {

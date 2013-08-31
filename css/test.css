@@ -9,14 +9,11 @@ a {
 }
 
 /* More-button styling */
-.ui-button-text-only .ui-button-text {
-    padding: 5%;
-}
+
 
 /* Grid styling */
 .grid {
     width: 95%;
-    height: auto;
     height: 600px;
     position: relative;
     overflow-x: none;
