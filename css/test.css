@@ -1,9 +1,10 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu&effect=shadow-multiple);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300&effect=shadow-multiple);
 
 body {
     padding: 20px;
-    font-family: Ubuntu;
-    
+    font-family: Open Sans;
+    color: #41575E;
+    background-color: #edf2f3;
     /*background: #6b6b6b; /* Old browsers */
     /*background: -moz-linear-gradient(top,  #6b6b6b 0%, #f7f7f7 100%); /* FF3.6+ */
     /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6b6b6b), color-stop(100%,#f7f7f7)); /* Chrome,Safari4+ */
@@ -12,6 +13,7 @@ body {
     /*background: -ms-linear-gradient(top,  #6b6b6b 0%,#f7f7f7 100%); /* IE10+ */
     /*background: linear-gradient(to bottom,  #6b6b6b 0%,#f7f7f7 100%); /* W3C */
     /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#f7f7f7',GradientType=0 ); /* IE6-9 */
+
 }
 
 a {
@@ -21,6 +23,10 @@ a {
 
 .underlined-link {
     text-decoration: underline;
+}
+
+.ui-state-default {
+    color: #41575E;
 }
 
 /* Grid styling */
