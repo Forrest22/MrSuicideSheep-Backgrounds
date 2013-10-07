@@ -21,6 +21,13 @@ a {
     text-decoration: none;
 }
 
+.sheepy {
+    float: left;
+    height: 140px;
+    margin-bottom: 1em;
+    margin-right: 1em;
+}
+
 .underlined-link {
     text-decoration: underline;
 }
