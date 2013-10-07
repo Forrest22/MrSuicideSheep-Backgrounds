@@ -5,6 +5,18 @@ var TILE_IDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
 // Grid
 $(function() {
 
+    function getQueryVariable() {
+        var query = window.location.search;
+        query = query.slice(1,query.length);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (decodeURIComponent(pair[0]) == "q") {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+    }
+
     // create the grid and an event which will update the grid
     // when either tile count or window size changes
     var el = document.getElementById('image-grid'),
@@ -20,17 +32,27 @@ $(function() {
                 height: newHeight+'px'
             });
 
+
         };
+
+    var query = getQueryVariable();
 
     grid.createTile = function(tileId) {
         var i = tileId%25;
         var tile = new Tiles.Tile(tileId);
         var startIndex = timesClicked*25 + 1;
-        $.getJSON('https://gdata.youtube.com/feeds/api/videos?author=MrSuicideSheep&start-index='+startIndex+'&max-results=25&v=2&alt=jsonc&orderby=published', function(ytdata) {
-            var html = "<a href=\"http://img.youtube.com/vi/"+ ytdata.data.items[i].id +"/maxresdefault.jpg\"><img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">";
-            tile.$el.append(html);
-            html =  "<h3 class=\"tile-title\"><a href=\"http://www.youtube.com/watch?v="+ ytdata.data.items[i].id +"\">" + ytdata.data.items[i].title + "<a></h3>";
-            tile.$el.append(html);
+        var hasData;
+        $.getJSON('https://gdata.youtube.com/feeds/api/videos?author=MrSuicideSheep&q='+query+'&start-index='+startIndex+'&max-results=25&v=2&alt=jsonc&orderby=published', function(ytdata) {
+            if(ytdata.data.items.length > i){
+                var html = "<a href=\"http://img.youtube.com/vi/"+ ytdata.data.items[i].id +"/maxresdefault.jpg\"><img class=\"thumbs\" src=\"http://img.youtube.com/vi/" + ytdata.data.items[i].id + "/maxresdefault.jpg\">";
+                tile.$el.append(html);
+                html =  "<h3 class=\"tile-title\"><a href=\"http://www.youtube.com/watch?v="+ ytdata.data.items[i].id +"\">" + ytdata.data.items[i].title + "<a></h3>";
+                tile.$el.append(html);
+                hasData = true;
+            }
+            else {
+                hasData = false;
+            }
             });
         return tile;
     };

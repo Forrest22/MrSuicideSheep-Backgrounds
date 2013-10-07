@@ -1,6 +1,9 @@
 /*! Tiles.js | http://thinkpixellab.com/tilesjs | 2012-12-03 */
 
 
+var php_var = "<?php echo $_GET[\"q\"]; ?>";
+alert(php_var);
+
 // single namespace export
 var Tiles = {};
 
@@ -463,23 +466,23 @@ Tiles.UniformTemplates = {
             if (!tile) {
 
                 tileId = newTileIds[i];
-
+                
                 // see if grid has a custom tile factory
                 if (this.createTile) {
-
+                    
                     tile = this.createTile(tileId);
+    
                     // skip the tile if it couldn't be created
                     if (!tile) {
                         //console.log('Tile element could not be created, id: ' + tileId);
                         continue;
                     }
 
-                }
+                } else {
 
-                else {
-                    console.log("An error has occured while creating one of the tiles.")
                     tile = new Tiles.Tile(tileId);
                 }
+                
                 // add tiles to queue (will be appended to DOM during redraw)
                 this.tilesAdded.push(tile);
                 //console.log('Adding tile: ' + tile.id);
@@ -632,18 +635,6 @@ Tiles.UniformTemplates = {
         return shouldRedraw;
     };
 
-    function removeEmptyTiles(tiles){
-        console.log(tiles);
-        var newTiles;
-        for (var i = tiles.length - 1; i >= 0; i--) {
-            console.log(tiles[i]);
-            console.log(tiles[i].hasData);
-            if(tiles[i].hasData){
-                console.log(newTiles.push(tiles[i].hasData));
-            }
-        }
-    }
-
     // redraws the grid after tile collection changes
     Grid.prototype.redraw = function(animate, onComplete) {
 
@@ -654,9 +645,6 @@ Tiles.UniformTemplates = {
             }
             return;
         }        
-
-        //console.log(this.tiles)
-        //this.tiles = removeEmptyTiles(this.tiles);
 
         var numTiles = this.tiles.length,
             pageSize = this.priorityPageSize,

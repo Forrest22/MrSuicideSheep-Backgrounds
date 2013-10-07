@@ -40,17 +40,20 @@
     </script>
 </head> 
 <body>
-  <img src="img/sheepy.png" class="sheepy">
-    <h1 class="font-effect-shadow-multiple">MrSuicideSheep Backgrounds</h1>
-    <h3>A bunch of backgrounds generated from <a class="underlined-link" href="http://www.youtube.com/user/MrSuicideSheep?feature=watch">MrSuicideSheep's</a> music videos.</h3>
+  <a href="/MrSuicideSheep-Backgrounds"><img src="img/sheepy.png" class="sheepy"></a>
+  <h1 class="font-effect-shadow-multiple">MrSuicideSheep Backgrounds</h1>
+  <h3>A bunch of backgrounds generated from <a class="underlined-link" href="http://www.youtube.com/user/MrSuicideSheep?feature=watch">MrSuicideSheep's</a> music videos.</h3>
+  <form action="search.php" method="get">
+    <input type="text" name="q"/>
+  </form>
     <!--<span class="sliderLabel">Number of Tiles</span>
     <div id="image-tiles" class="slider"></div>
     <span id="tileCount" class="sliderLabel"></span>-->
     
     <div id="image-grid" class="grid"></div>
     <div style="text-align: center;">
-    <button class="more-button">Load More</button>
+      <button class="more-button">Load More</button>
     </div>
     <h3>Created by <a href="">Forrest D.</a></h3>
-</body>
-</html>
+  </body>
+  </html>
