@@ -19,16 +19,26 @@ function renderNextChunk() {
   nextChunk.forEach(video => {
     const imgUrl = generateThumbnail(video.id);
     const div = document.createElement('div');
+    div.classList.add('relative', 'aspect-[16/9]', 'overflow-hidden', 'bg-gray-900');
+
     div.innerHTML = `
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="w-10 h-10 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+      </div>
       <img src="${imgUrl}" alt="${video.title}"
-           class="w-full cursor-pointer rounded shadow hover:opacity-80 transition"
+           class="w-full h-full object-cover opacity-0 transition-opacity duration-500 cursor-pointer"
+           onload="this.style.opacity=1; this.previousElementSibling.remove()"
+           onerror="this.style.opacity=1; this.previousElementSibling.remove()"
            onclick='openCarousel(${JSON.stringify(video)})' />
     `;
+
     gallery.appendChild(div);
   });
 
   loadedCount += LOAD_CHUNK;
 }
+
+
 
 // Lazy load on scroll
 window.addEventListener('scroll', () => {
