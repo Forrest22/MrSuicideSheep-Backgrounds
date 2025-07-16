@@ -72,12 +72,15 @@ function openCarousel(video) {
   new Swiper('.swiper-container', {
     loop: true
   });
+  document.body.classList.add('overflow-hidden');
 }
 
 function closeCarousel() {
   modal.classList.add('hidden');
   carouselSlides.innerHTML = '';
   videoMeta.innerHTML = '';
+  document.body.classList.remove('overflow-hidden');
+  videoMeta.scrollTop = 0;
 }
 
 // Close modal on click outside
