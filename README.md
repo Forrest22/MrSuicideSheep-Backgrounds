@@ -2,7 +2,7 @@
 
 MrSuicideSheep is a core part of my music taste and I also find his artwork choices really beautiful, so I made this to appreciate them.
 
-🌐 **Try it here:** <https://nikbaya.github.io/biomarker_ref_intervals/>
+🌐 **Try it here:** <https://forrest22.github.io/MrSuicideSheep-Backgrounds/>
 
 ## Technical Choices
 
