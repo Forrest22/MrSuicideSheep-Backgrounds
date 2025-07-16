@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyberpunk Art Feed</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Swiper Carousel -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+  </head>
+  <body
+    class="bg-gradient-to-br from-purple-900 to-black min-h-screen font-mono"
+  >
+    <div class="p-6 text-center text-3xl font-bold neon-text">
+      Cyberpunk Art Feed
+    </div>
+
+    <div
+      id="gallery"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 p-2"
+    ></div>
+
+    <!-- Carousel Modal -->
+    <div
+      id="carouselModal"
+      class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden"
+    >
+      <div class="relative w-full max-w-4xl">
+        <button
+          onclick="closeCarousel()"
+          class="absolute top-4 right-4 z-50 text-white text-4xl font-bold bg-black bg-opacity-40 rounded-full p-2 hover:bg-opacity-70 transition"
+        >
+          ✕
+        </button>
+        <div class="swiper-container">
+          <div class="swiper-wrapper" id="carouselSlides"></div>
+        </div>
+        <div id="videoMeta" class="p-4 text-white text-center"></div>
+      </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- App Logic -->
+    <script src="app.js"></script>
+  </body>
+</html>
