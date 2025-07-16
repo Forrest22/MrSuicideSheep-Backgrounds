@@ -76,11 +76,11 @@ function openCarousel(video) {
 }
 
 function closeCarousel() {
+  videoMeta.scrollTop = 0;
   modal.classList.add('hidden');
   carouselSlides.innerHTML = '';
   videoMeta.innerHTML = '';
   document.body.classList.remove('overflow-hidden');
-  videoMeta.scrollTop = 0;
 }
 
 // Close modal on click outside
