@@ -21,20 +21,14 @@ function renderNextChunk() {
     const div = document.createElement('div');
     div.innerHTML = `
       <img src="${imgUrl}" alt="${video.title}"
-           class="w-full h-full object-cover cursor-pointer transition"
+           class="w-full cursor-pointer rounded shadow hover:opacity-80 transition"
            onclick='openCarousel(${JSON.stringify(video)})' />
     `;
     gallery.appendChild(div);
   });
 
   loadedCount += LOAD_CHUNK;
-
-  // Auto-load more if screen still isn't scrollable
-  if (document.body.offsetHeight <= window.innerHeight && loadedCount < allVideos.length) {
-    renderNextChunk();
-  }
 }
-
 
 // Lazy load on scroll
 window.addEventListener('scroll', () => {
