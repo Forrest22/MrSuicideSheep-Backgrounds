@@ -1,7 +1,7 @@
-const gallery = document.getElementById('gallery');
-const modal = document.getElementById('carouselModal');
-const carouselSlides = document.getElementById('carouselSlides');
-const videoMeta = document.getElementById('videoMeta');
+const gallery = document.getElementById("gallery");
+const modal = document.getElementById("carouselModal");
+const carouselSlides = document.getElementById("carouselSlides");
+const videoMeta = document.getElementById("videoMeta");
 
 let allVideos = [];
 let loadedCount = 0;
@@ -16,20 +16,35 @@ function generateThumbnail(id) {
 function renderNextChunk() {
   const nextChunk = allVideos.slice(loadedCount, loadedCount + LOAD_CHUNK);
 
-  nextChunk.forEach(video => {
+  nextChunk.forEach((video) => {
     const imgUrl = generateThumbnail(video.id);
-    const div = document.createElement('div');
-    div.classList.add('relative', 'aspect-[16/9]', 'overflow-hidden', 'bg-gray-900');
+    const div = document.createElement("div");
+    div.classList.add(
+      "relative",
+      "aspect-[16/9]",
+      "overflow-hidden",
+      "bg-gray-900"
+    );
 
     div.innerHTML = `
       <div class="absolute inset-0 flex items-center justify-center">
-        <div class="w-10 h-10 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+        <div class="w-10 h-10 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin">
+        </div>
+      </div>      
+      <div class="glitch-img">
+        <div class="glitch-layer glitch-red">
+          <img src="${imgUrl}" alt="Red glitch layer for ${video.title}">
+        </div>
+        <div class="glitch-layer glitch-blue">
+          <img src="${imgUrl}" alt="Blue glitch layer for ${video.title}">
+        </div>
+        <img src="${imgUrl}" alt="${
+      video.title
+    }" class="glitch-base w-full h-full object-cover opacity-0 transition-opacity duration-500 cursor-pointer"
+            onload="this.style.opacity=1; this.closest('.glitch-img').parentElement.querySelector('.img-loader')?.remove()"
+            onerror="this.style.opacity=1; this.closest('.glitch-img').parentElement.querySelector('.img-loader')?.remove()"
+            onclick='openCarousel(${JSON.stringify(video)})'>
       </div>
-      <img src="${imgUrl}" alt="${video.title}"
-           class="w-full h-full object-cover opacity-0 transition-opacity duration-500 cursor-pointer"
-           onload="this.style.opacity=1; this.previousElementSibling.remove()"
-           onerror="this.style.opacity=1; this.previousElementSibling.remove()"
-           onclick='openCarousel(${JSON.stringify(video)})' />
     `;
 
     gallery.appendChild(div);
@@ -38,11 +53,9 @@ function renderNextChunk() {
   loadedCount += LOAD_CHUNK;
 }
 
-
-
 // Lazy load on scroll
-window.addEventListener('scroll', () => {
-  if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)) {
+window.addEventListener("scroll", () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
     // Load more if available
     if (loadedCount < allVideos.length) {
       renderNextChunk();
@@ -67,41 +80,41 @@ function openCarousel(video) {
        class="text-cyan-400 underline mt-2 block">Watch on YouTube</a>
   `;
 
-  modal.classList.remove('hidden');
+  modal.classList.remove("hidden");
 
-  new Swiper('.swiper-container', {
-    loop: true
+  new Swiper(".swiper-container", {
+    loop: true,
   });
-  document.body.classList.add('overflow-hidden');
+  document.body.classList.add("overflow-hidden");
 }
 
 function closeCarousel() {
   videoMeta.scrollTop = 0;
-  modal.classList.add('hidden');
-  carouselSlides.innerHTML = '';
-  videoMeta.innerHTML = '';
-  document.body.classList.remove('overflow-hidden');
+  modal.classList.add("hidden");
+  carouselSlides.innerHTML = "";
+  videoMeta.innerHTML = "";
+  document.body.classList.remove("overflow-hidden");
 }
 
 // Close modal on click outside
-modal.addEventListener('click', (e) => {
+modal.addEventListener("click", (e) => {
   if (e.target === modal) closeCarousel();
 });
 
 // Close modal on escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
     closeCarousel();
   }
 });
 
 // Load videos.json and start initial render
-fetch('videos.json')
-  .then(res => res.json())
-  .then(videoList => {
+fetch("videos.json")
+  .then((res) => res.json())
+  .then((videoList) => {
     allVideos = videoList;
     renderNextChunk(); // initial load
   })
-  .catch(err => {
-    console.error('Failed to load video list:', err);
+  .catch((err) => {
+    console.error("Failed to load video list:", err);
   });
