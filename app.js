@@ -12,6 +12,13 @@ function generateThumbnail(id) {
   return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
 }
 
+function getVideoByVideoId(videoId) {
+  const videoMatchingId = allVideos.find((video) => {
+    return video.id === videoId;
+  });
+  return videoMatchingId;
+}
+
 // Render a chunk of videos from current loadedCount
 function renderNextChunk() {
   const nextChunk = allVideos.slice(loadedCount, loadedCount + LOAD_CHUNK);
@@ -38,12 +45,10 @@ function renderNextChunk() {
         <div class="glitch-layer glitch-blue">
           <img src="${imgUrl}" alt="Blue glitch layer for ${video.title}">
         </div>
-        <img src="${imgUrl}" alt="${
-      video.title
-    }" class="glitch-base w-full h-full object-cover opacity-0 transition-opacity duration-500 cursor-pointer"
+        <img src="${imgUrl}" alt="${video.title}" class="glitch-base w-full h-full object-cover opacity-0 transition-opacity duration-500 cursor-pointer"
             onload="this.style.opacity=1; this.closest('.glitch-img').parentElement.querySelector('.img-loader')?.remove()"
             onerror="this.style.opacity=1; this.closest('.glitch-img').parentElement.querySelector('.img-loader')?.remove()"
-            onclick='openCarousel(${JSON.stringify(video)})'>
+            onclick='openCarousel("${video.id}")'>
       </div>
     `;
 
@@ -64,7 +69,8 @@ window.addEventListener("scroll", () => {
 });
 
 // Open modal with swiper
-function openCarousel(video) {
+function openCarousel(videoId) {
+  const video = getVideoByVideoId(videoId);
   const fullImage = generateThumbnail(video.id);
 
   carouselSlides.innerHTML = `
