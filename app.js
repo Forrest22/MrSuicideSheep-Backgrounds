@@ -34,7 +34,6 @@ function renderNextChunk() {
       "bg-gray-900"
     );
 
-    // The following is the structure of each thumbnail, with loading spinner and glitch effects on hover
     div.innerHTML = `
       <div class="absolute inset-0 flex items-center justify-center">
         <div class="w-10 h-10 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin">
@@ -77,7 +76,7 @@ function populateCarousel() {
       (video) => `
     <div class="swiper-slide flex items-center justify-center">
       <img src="${generateThumbnail(video.id)}"
-           alt="${video.title}"
+           alt="Background of ${video.title}"
            class="max-h-[80vh] object-contain" />
     </div>
   `
@@ -115,19 +114,9 @@ function openCarousel(videoId) {
 
   // Trigger meta update for initial slide
   swiperInstance.emit("slideChange");
+
+  // Add arrowkey navigation listener
   document.addEventListener("keydown", handleArrowKeys);
-}
-
-function closeCarousel() {
-  modal.classList.add("hidden");
-  document.body.classList.remove("overflow-hidden");
-  document.removeEventListener("keydown", handleArrowKeys);
-}
-
-function handleArrowKeys(e) {
-  if (!swiperInstance || modal.classList.contains("hidden")) return;
-  if (e.key === "ArrowRight") swiperInstance.slideNext();
-  if (e.key === "ArrowLeft") swiperInstance.slidePrev();
 }
 
 // Close modal on click outside
@@ -141,6 +130,19 @@ document.addEventListener("keydown", (e) => {
     closeCarousel();
   }
 });
+
+function closeCarousel() {
+  videoMeta.scrollTop = 0;
+  modal.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+  document.removeEventListener("keydown", handleArrowKeys);
+}
+
+function handleArrowKeys(e) {
+  if (!swiperInstance || modal.classList.contains("hidden")) return;
+  if (e.key === "ArrowRight") swiperInstance.slideNext();
+  if (e.key === "ArrowLeft") swiperInstance.slidePrev();
+}
 
 // Initialize once videos are loaded
 fetch("videos.json")
