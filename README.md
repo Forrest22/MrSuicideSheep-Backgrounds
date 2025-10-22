@@ -11,3 +11,11 @@ I wanted this to be hosted on GitHub Pages, so I designed this to be lean, with 
 I had a lot of fun doing small (S)CSS learnings and was proudly able to make a CSS glitch effect based off of Chris Coyier's wonderful [Glitch Effect on Text / Images / SVG](https://css-tricks.com/glitch-effect-text-images-svg/) since I didn't know how to use mixins in the beginning of this project.
 
 Swiper proved to be a very easy to use library and I am very happy with how it works as a gallery modal.
+
+## Future Roadmap
+
+I would like to in the future follow up on the following feature ideas:
+
+- Self updater of images
+  - This would mean having to support the images myself so that they can be pre-sorted, otherwise it would only have the current page's images?
+- Sort via color groupings as per <https://tomekdev.com/posts/sorting-colors-in-js>
